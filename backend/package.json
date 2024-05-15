@@ -100,6 +100,7 @@
   },
   "mikro-orm": {
     "useTsNode": true,
+    "type": "module",
     "configPaths": [
       "./src/modules/database/migrations-config.ts",
       "./dist/modules/database/migrations-config.js"

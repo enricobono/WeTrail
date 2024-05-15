@@ -7,4 +7,5 @@ import { getEnvVariables } from './loader';
     NestConfigModule.forRoot({ isGlobal: true, load: [getEnvVariables] }),
   ],
 })
-export class ConfigModule {}
+export class ConfigModule {
+}

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import TravelRepository from "../repositories/TravelRepository";
+import TravelRepository from "../../repositories/TravelRepository";
 
 const travels = ref([])
 

@@ -3,6 +3,7 @@ import { TravelsResolver } from './travels.resolver';
 import { TravelsService } from './travels.service';
 import { createMock } from '@golevelup/ts-jest';
 import { TravelsResults } from "./types/travels-results.type";
+import { TravelType } from "./types/travel.type";
 
 describe('TravelsResolver', () => {
   let sut: TravelsResolver;
@@ -33,6 +34,20 @@ describe('TravelsResolver', () => {
       expect(results.nodes[0].id).toBe('travel-1');
       expect(results.nodes[0].name).toBe('Test travel');
       expect(travelsService.findAll).toHaveBeenCalledTimes(1);
+    });
+
+    it('findOneBySlug should return a travel', async () => {
+      travelsService.findOneBySlug = jest
+        .fn()
+        .mockResolvedValueOnce({ id: 'travel-1', name: 'Test travel' });
+
+      const results = await sut.findOneBySlug('travel-1');
+
+      expect(results).toBeInstanceOf(Object);
+      expect(results).toBeInstanceOf(Object);
+      expect(results.id).toBe('travel-1');
+      expect(results.name).toBe('Test travel');
+      expect(travelsService.findOneBySlug).toHaveBeenCalledTimes(1);
     });
   });
 });

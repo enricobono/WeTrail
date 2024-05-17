@@ -9,7 +9,7 @@ export class TravelsService {
   }
 
   async findAll() {
-    console.log('travels.service: findAll travels');
+    console.log('travels.service: findAll()');
 
     const orderBy: OrderDefinition<Travel> = { startingDate: 'ASC' };
 
@@ -17,8 +17,9 @@ export class TravelsService {
     return nodes;
   }
 
-  async findOne(id: string) {
-    const travel = await this.em.findOne(Travel, { id });
+  async findOneBySlug(slug: string) {
+    console.log('travels.service: findOneBySlug()');
+    const travel = await this.em.findOne(Travel, { slug });
     return travel;
   }
 }

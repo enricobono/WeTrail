@@ -1,0 +1,21 @@
+query GetTravels {
+  travels {
+    nodes {
+      id
+      slug
+      name
+      description
+      image
+      startingDate
+      endingDate
+      price
+      totalPax
+      reservedPax
+      mood_nature
+      mood_relax
+      mood_history
+      mood_culture
+      mood_party
+    }
+  }
+}

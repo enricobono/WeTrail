@@ -27,12 +27,12 @@ export class TravelsResolver {
   }
 
   @Query(() => TravelType, { name: 'travel' })
-  async findOne(
-    @Args('id') id: string,
+  async findOneBySlug(
+    @Args('slug') slug: string,
   ): Promise<Travel> {
-    console.log('travels.resolver findOneById()');
+    console.log('travels.resolver findOneBySlug()');
 
-    const travel = await this.travelsService.findOne(id);
+    const travel = await this.travelsService.findOneBySlug(slug);
     if (!travel) {
       throw new NotFoundException('Travel not found');
     }

@@ -2,6 +2,7 @@ export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'nuxt-graphql-client'],
+  pages: true,
   runtimeConfig: {
     public: {
       ENVIRONMENT_NAME: process.env.ENVIRONMENT_NAME,

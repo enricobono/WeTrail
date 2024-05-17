@@ -46,11 +46,13 @@ defineProps({
           </header>
         </div>
         <div class="flex justify-end">
-          <a href="" class="bg-slate-700 hover:bg-slate-900 border border-slate-700 text-white py-2 px-4 rounded-md">
-            Book now
-          </a>
+          <NuxtLink :to="'/travels/' + travel.slug"
+                    class="bg-slate-700 hover:bg-slate-900 border border-slate-700 text-white py-2 px-4 rounded-md">
+            Get More Info
+          </NuxtLink>
         </div>
       </div>
     </div>
+
   </div>
 </template>

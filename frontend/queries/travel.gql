@@ -11,11 +11,11 @@ query GetTravels {
       price
       totalSeats
       reservedSeats
-      mood_nature
-      mood_relax
-      mood_history
-      mood_culture
-      mood_party
+      moodNature
+      moodRelax
+      moodHistory
+      moodCulture
+      moodParty
     }
   }
 }
@@ -32,11 +32,11 @@ query GetTravelBySlug ($slug: String!) {
     price
     totalSeats
     reservedSeats
-    mood_nature
-    mood_relax
-    mood_history
-    mood_culture
-    mood_party
+    moodNature
+    moodRelax
+    moodHistory
+    moodCulture
+    moodParty
   }
 }
 
@@ -52,11 +52,11 @@ query GetTravelById ($id: String!) {
     price
     totalSeats
     reservedSeats
-    mood_nature
-    mood_relax
-    mood_history
-    mood_culture
-    mood_party
+    moodNature
+    moodRelax
+    moodHistory
+    moodCulture
+    moodParty
   }
 }
 

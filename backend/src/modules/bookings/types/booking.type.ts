@@ -23,40 +23,40 @@ export class BookingType {
   @Field(() => Int)
   grandTotal: number;
 
-  @Field()
-  firstName: string;
+  @Field({ nullable: true })
+  firstName?: string;
 
-  @Field()
+  @Field({ nullable: true })
   lastName: string;
 
-  @Field()
+  @Field({ nullable: true })
   email: string;
 
-  @Field()
+  @Field({ nullable: true })
   phoneNumber: string;
 
-  @Field()
+  @Field({ nullable: true })
   address1: string;
 
-  @Field()
+  @Field({ nullable: true })
   address2: string;
 
-  @Field()
+  @Field({ nullable: true })
   city: string;
 
-  @Field()
+  @Field({ nullable: true })
   province: string;
 
-  @Field()
+  @Field({ nullable: true })
   country: string;
 
-  @Field()
+  @Field({ nullable: true })
   zipCode: string;
 
-  @Field()
+  @Field({ nullable: true })
   paymentProcessor: string;
 
-  @Field()
+  @Field({ nullable: true })
   paymentId: string;
 
   @Field(() => GraphQLISODateTime)

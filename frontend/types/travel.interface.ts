@@ -9,9 +9,9 @@ export interface Travel {
   price: number
   totalSeats: number
   reservedSeats: number
-  mood_nature: number
-  mood_relax: number
-  mood_history: number
-  mood_culture: number
-  mood_party: number
+  moodNature: number
+  moodRelax: number
+  moodHistory: number
+  moodCulture: number
+  moodParty: number
 }

@@ -18,19 +18,10 @@ TravelRepository.findOneBySlug(route.params.slug).then((results) => {
   travel.value = results
   console.log(travel);
 
-  bookingStore.getBookingId().then((id: string|null) => {
-    console.log('bookingStore.getBookingId().then')
-    console.log(id);
-    console.log(null);
-    
-
+  bookingStore.getBookingId().then((id: string | null) => {
     if (id == null) {
-      console.log('return 1');
-
       return
     }
-    console.log('continue 2');
-
 
     BookingRepository.find(id).then((booking) => {
       if (booking === null) {
@@ -109,6 +100,14 @@ function reserve() {
               <span class="inline-flex  font-medium bg-green-100 text-green-600 rounded-full px-2 py-0.5">
                 {{ formatCurrency(travel.price * seats) }}
               </span>
+            </div>
+
+            <div class="flex flex-col md:flex-row mx-auto">
+              <TravelMood mood="Nature" :score="travel.moodNature" color="bg-emerald-300"/>
+              <TravelMood mood="Relax" :score="travel.moodRelax" color="bg-yellow-400"/>
+              <TravelMood mood="History" :score="travel.moodHistory" color="bg-slate-400"/>
+              <TravelMood mood="Culture" :score="travel.moodCulture" color="bg-blue-200"/>
+              <TravelMood mood="Party" :score="travel.moodParty" color="bg-amber-500"/>
             </div>
 
             <div class="grid gap-4 md:grid-cols-3 mt-4">

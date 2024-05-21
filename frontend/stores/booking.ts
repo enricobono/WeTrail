@@ -14,7 +14,6 @@ export const useBookingStore = defineStore('bookingStore', {
         this.delete(bookingId)
       })
 
-
       await BookingRepository.create(travelSlug, seats).then((results) => {
         console.log('dentro il then');
 
@@ -33,16 +32,11 @@ export const useBookingStore = defineStore('bookingStore', {
       })
     },
     async getBookingId(): Promise<string | null> {
-      console.log('useBookingStore.getBookingId() ' + 1);
-
       this.id = localStorage.getItem('booking-id')
 
-
       if (this.id === 'null') {
-        console.error('useBookingStore.getBookingId() ' + 'no booking id, returning...');
         return null
       }
-      console.log('useBookingStore.getBookingId() ' + 5);
 
       return this.id
     },

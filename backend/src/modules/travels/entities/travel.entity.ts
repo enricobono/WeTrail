@@ -44,17 +44,17 @@ export class Travel {
   reservedSeats: number;
 
   @Property({ type: IntegerType })
-  mood_nature: number;
+  moodNature: number;
 
   @Property({ type: IntegerType })
-  mood_relax: number;
+  moodRelax: number;
 
   @Property({ type: IntegerType })
-  mood_history: number;
+  moodHistory: number;
 
   @Property({ type: IntegerType })
-  mood_culture: number;
+  moodCulture: number;
 
   @Property({ type: IntegerType })
-  mood_party: number;
+  moodParty: number;
 }

@@ -21,29 +21,27 @@ defineProps({
         </NuxtLink>
       </div>
       <div class="grow flex flex-col p-4">
-        <div class="grow mb-4">
-          <header class="space-y-0">
-            <a href="" target="_blank">
-              <h3 class="text-lg font-semibold mb-1">
-                {{ travel.name }}
-              </h3>
-            </a>
-            <div class="">
-              Dates: {{ formatDate(travel.startingDate) }} - {{ formatDate(travel.endingDate) }}
-            </div>
-            <div>
-              Available seats:
-              <span :class="{'bg-amber-100 text-amber-600 font-medium   rounded-full px-2 py-0.5 mb-4': travel.totalSeats - travel.reservedSeats <= 3}">
+        <div class="grow mb-4 space-y-0">
+          <a href="" target="_blank">
+            <h3 class="text-lg font-semibold mb-1">
+              {{ travel.name }}
+            </h3>
+          </a>
+          <div class="">
+            Dates: {{ formatDate(travel.startingDate) }} - {{ formatDate(travel.endingDate) }}
+          </div>
+          <div>
+            Available seats:
+            <span :class="{'bg-amber-100 text-amber-600 font-medium   rounded-full px-2 py-0.5 mb-4': travel.totalSeats - travel.reservedSeats <= 3}">
                     {{ travel.totalSeats - travel.reservedSeats }}
                   </span>
-            </div>
-            <div>
-              Price:
-              <span class="inline-flex  font-medium bg-green-100 text-green-600 rounded-full px-2 py-0.5 mb-4">
+          </div>
+          <div>
+            Price:
+            <span class="inline-flex  font-medium bg-green-100 text-green-600 rounded-full px-2 py-0.5 mb-4">
                 {{ formatCurrency(travel.price) }}
               </span>
-            </div>
-          </header>
+          </div>
         </div>
         <div class="flex justify-end">
           <NuxtLink :to="'/travels/' + travel.slug"

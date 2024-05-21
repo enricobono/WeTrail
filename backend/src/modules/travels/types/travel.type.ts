@@ -45,17 +45,17 @@ export class TravelType {
   // even if they are presented as a sub-object.
   // So we are keeping them here, to save some queries on the database
   @Field(() => Int)
-  mood_nature: number;
+  moodNature: number;
 
   @Field(() => Int)
-  mood_relax: number;
+  moodRelax: number;
 
   @Field(() => Int)
-  mood_history: number;
+  moodHistory: number;
 
   @Field(() => Int)
-  mood_culture: number;
+  moodCulture: number;
 
   @Field(() => Int)
-  mood_party: number;
+  moodParty: number;
 }

@@ -22,7 +22,6 @@ bookingStore.getBookingId().then((id) => {
 
   BookingRepository.find(id).then((results) => {
     if (results === null) {
-
       booking.value = null
       return
     }

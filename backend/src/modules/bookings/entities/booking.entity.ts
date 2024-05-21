@@ -8,7 +8,7 @@ import {
 } from '@mikro-orm/core';
 import { v4 } from 'uuid';
 
-@Entity({tableName:'bookings'})
+@Entity({ tableName: 'bookings' })
 export class Booking {
   @PrimaryKey({ type: UuidType })
   id: string = v4();
@@ -25,45 +25,45 @@ export class Booking {
   @Property({ type: IntegerType })
   grandTotal: number;
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   firstName: string
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   lastName: string
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   email: string
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   phoneNumber: string
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   address1: string
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   address2: string
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   city: string
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   province: string
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   country: string
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   zipCode: string
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   paymentProcessor: string
 
-  @Property({nullable:true})
+  @Property({ nullable: true })
   paymentId: string
 
-  @Property({ type: DateTimeType, nullable:true })
+  @Property({ type: DateTimeType, nullable: true })
   createdAt: Date;
 
-  @Property({ type: DateTimeType, nullable:true })
+  @Property({ type: DateTimeType, nullable: true })
   updatedAt: Date;
 }

@@ -1,6 +1,6 @@
 import type { Travel } from "./travel.interface";
 
-export type TravelsResponse = {
+export interface TravelsResponse {
   travels: {
     nodes: Travel[]
   }

@@ -1,0 +1,37 @@
+mutation CreateBooking ($createBookingInput: CreateBookingInput!) {
+  createBooking(createBookingInput: $createBookingInput) {
+    id
+  }
+}
+
+query GetBookingById ($id: String!) {
+  getBookingById(id: $id) {
+    id
+    travelId
+    seats
+    grandTotal
+    createdAt
+    updatedAt
+    status
+    firstName
+    lastName
+    email
+    phoneNumber
+    address1
+    address2
+    city
+    province
+    country
+    zipCode
+    paymentProcessor
+    paymentId
+  }
+}
+
+
+query DeleteBookingById ($id: String!) {
+  deleteBookingById(id: $id) {
+    id
+  }
+}
+

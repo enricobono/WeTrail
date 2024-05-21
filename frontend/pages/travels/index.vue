@@ -26,10 +26,12 @@ TravelRepository.findAll().then((results) => {
     </div>
 
     <div v-else>
-      <div class="p-4 mb-4 text-sm rounded-lg bg-blue-50" role="alert">
-        <b>No way!</b>
-        Seems there are no travels available at the moment. Grab a coffee and come back in 5 minutes ☺️
-      </div>
+
+      <Alert
+          :level="'info'"
+          :message="'Seems there are no travels available at the moment. Grab a coffee and come back in 5 minutes ☺️'"
+      />
+
     </div>
   </div>
 

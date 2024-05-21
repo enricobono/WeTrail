@@ -7,8 +7,8 @@ export interface Travel {
   startingDate: Date
   endingDate: Date
   price: number
-  totalPax: number
-  reservedPax: number
+  totalSeats: number
+  reservedSeats: number
   mood_nature: number
   mood_relax: number
   mood_history: number

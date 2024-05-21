@@ -1,0 +1,62 @@
+query GetTravels {
+  travels {
+    nodes {
+      id
+      slug
+      name
+      description
+      image
+      startingDate
+      endingDate
+      price
+      totalSeats
+      reservedSeats
+      mood_nature
+      mood_relax
+      mood_history
+      mood_culture
+      mood_party
+    }
+  }
+}
+
+query GetTravelBySlug ($slug: String!) {
+  getTravelBySlug(slug: $slug) {
+    id
+    slug
+    name
+    description
+    image
+    startingDate
+    endingDate
+    price
+    totalSeats
+    reservedSeats
+    mood_nature
+    mood_relax
+    mood_history
+    mood_culture
+    mood_party
+  }
+}
+
+query GetTravelById ($id: String!) {
+  getTravelById(id: $id) {
+    id
+    slug
+    name
+    description
+    image
+    startingDate
+    endingDate
+    price
+    totalSeats
+    reservedSeats
+    mood_nature
+    mood_relax
+    mood_history
+    mood_culture
+    mood_party
+  }
+}
+

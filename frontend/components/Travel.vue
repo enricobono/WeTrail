@@ -16,9 +16,9 @@ defineProps({
 
     <div class="flex flex-col h-full">
       <div class="relative">
-        <a href="" target="_blank">
+        <NuxtLink :to="'/travels/' + travel.slug">
           <img class="w-full" :src="travel.image" width="300" height="300" alt="{{ travel.name }}">
-        </a>
+        </NuxtLink>
       </div>
       <div class="grow flex flex-col p-4">
         <div class="grow mb-4">
@@ -33,8 +33,8 @@ defineProps({
             </div>
             <div>
               Available seats:
-              <span :class="{'bg-amber-100 text-amber-600 font-medium   rounded-full px-2 py-0.5 mb-4': travel.totalPax - travel.reservedPax <= 3}">
-                    {{ travel.totalPax - travel.reservedPax }}
+              <span :class="{'bg-amber-100 text-amber-600 font-medium   rounded-full px-2 py-0.5 mb-4': travel.totalSeats - travel.reservedSeats <= 3}">
+                    {{ travel.totalSeats - travel.reservedSeats }}
                   </span>
             </div>
             <div>

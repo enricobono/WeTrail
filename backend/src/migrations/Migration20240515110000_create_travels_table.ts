@@ -11,8 +11,8 @@ export class Migration20240515110000_create_travels_table extends Migration {
       ' "starting_date" date NOT NULL,' +
       ' "ending_date" date NOT NULL,' +
       ' "price" int NOT NULL,' +
-      ' "total_pax" smallint NOT NULL DEFAULT 5,' +
-      ' "reserved_pax" smallint NOT NULL DEFAULT 0,' +
+      ' "total_seats" smallint NOT NULL DEFAULT 5,' +
+      ' "reserved_seats" smallint NOT NULL DEFAULT 0,' +
       ' "mood_nature" smallint NOT NULL DEFAULT 0,' +
       ' "mood_relax" smallint NOT NULL DEFAULT 0,' +
       ' "mood_history" smallint NOT NULL DEFAULT 0,' +

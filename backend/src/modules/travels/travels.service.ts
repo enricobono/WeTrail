@@ -19,7 +19,11 @@ export class TravelsService {
 
   async findOneBySlug(slug: string) {
     console.log('travels.service: findOneBySlug()');
-    const travel = await this.em.findOne(Travel, { slug });
-    return travel;
+    return await this.em.findOne(Travel, { slug });
+  }
+
+  async findOneById(id: string) {
+    console.log('travels.service: findOneById()');
+    return await this.em.findOne(Travel, { id });
   }
 }

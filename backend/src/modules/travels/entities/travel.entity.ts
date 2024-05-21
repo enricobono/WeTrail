@@ -38,10 +38,10 @@ export class Travel {
   price: number;
 
   @Property({ type: IntegerType })
-  totalPax: number;
+  totalSeats: number;
 
   @Property({ type: IntegerType })
-  reservedPax: number;
+  reservedSeats: number;
 
   @Property({ type: IntegerType })
   mood_nature: number;

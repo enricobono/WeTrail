@@ -35,12 +35,12 @@ export class TravelType {
   price: number;
 
   @Field(() => Int)
-  totalPax: number;
+  totalSeats: number;
 
   @Field(() => Int)
-  reservedPax: number;
+  reservedSeats: number;
 
-  // We could move the mood* fields in a dedicated table with a one-to-many or many-to-many relation,
+  // We may move the mood* fields in a dedicated table with a one-to-many or many-to-many relation,
   // but the sample travels.json file suggests all those moods are mandatory for each Travel,
   // even if they are presented as a sub-object.
   // So we are keeping them here, to save some queries on the database

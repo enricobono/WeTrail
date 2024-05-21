@@ -15,6 +15,8 @@ This project is a NestJS API backend
 - Start the docker application to get the database up and running: `docker-compose up -d`
 - Start the backend server: `npm run start:dev`
 
+Migrations will be automatically executed at the startup.
+
 
 ## Tests
 

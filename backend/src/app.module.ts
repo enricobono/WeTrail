@@ -2,10 +2,10 @@ import { Module, ValidationPipe } from '@nestjs/common';
 import { APP_PIPE } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-
 import { DatabaseModule } from './modules/database/database.module';
 import { ConfigModule } from './modules/config/config.module';
 import { TravelsModule } from './modules/travels/travels.module';
+import { BookingsModule } from './modules/bookings/bookings.module';
 
 @Module({
   imports: [
@@ -17,6 +17,7 @@ import { TravelsModule } from './modules/travels/travels.module';
       sortSchema: true,
     }),
     TravelsModule,
+    BookingsModule,
   ],
   controllers: [],
   providers: [

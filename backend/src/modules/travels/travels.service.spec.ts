@@ -20,33 +20,46 @@ describe('TravelsService', (): void => {
     em = module.get<EntityManager>(EntityManager);
   });
 
-  describe('travels service', () => {
-    it('findAll should return all the travels', async () => {
-      em.findAndCount = jest
-        .fn()
-        .mockResolvedValueOnce([[{ id: 'travel-1', name: 'Test travel' }], 1]);
+  it('findAll should return all the travels', async () => {
+    em.findAndCount = jest
+      .fn()
+      .mockResolvedValueOnce([[{ id: 'travel-1', name: 'Test travel' }], 1]);
 
-      const results = await sut.findAll();
+    const results = await sut.findAll();
 
-      expect(results).toBeInstanceOf(Array);
-      expect(results[0].id).toBe('travel-1');
-      expect(results[0].name).toBe('Test travel');
-      expect(em.findAndCount).toHaveBeenCalledWith(Travel, {}, { orderBy: { startingDate: 'ASC' } });
-    });
+    expect(results).toBeInstanceOf(Array);
+    expect(results[0].id).toBe('travel-1');
+    expect(results[0].name).toBe('Test travel');
+    expect(em.findAndCount).toHaveBeenCalledWith(Travel, {}, { orderBy: { startingDate: 'ASC' } });
+  });
 
-    it('findOneBySlug should return a travel', async () => {
-      em.findOne = jest
-        .fn()
-        .mockResolvedValueOnce({ id: 'travel-1', name: 'Test travel' });
+  it('findOneBySlug should return a travel', async () => {
+    em.findOne = jest
+      .fn()
+      .mockResolvedValueOnce({ id: 'travel-1', name: 'Test travel' });
 
-      const slug = 'travel-1'
-      const results = await sut.findOneBySlug(slug);
-      console.log(results);
+    const slug = 'travel-1'
+    const results = await sut.findOneBySlug(slug);
+    console.log(results);
 
-      expect(results).toBeInstanceOf(Object);
-      expect(results.id).toBe('travel-1');
-      expect(results.name).toBe('Test travel');
-      expect(em.findOne).toHaveBeenCalledWith(Travel, { slug });
-    });
+    expect(results).toBeInstanceOf(Object);
+    expect(results.id).toBe('travel-1');
+    expect(results.name).toBe('Test travel');
+    expect(em.findOne).toHaveBeenCalledWith(Travel, { slug });
+  });
+
+  it('findOneById should return a travel', async () => {
+    em.findOne = jest
+      .fn()
+      .mockResolvedValueOnce({ id: 'travel-1', name: 'Test travel' });
+
+    const id = '00000000-0000-4000-b000-000000000001'
+    const results = await sut.findOneById(id);
+    console.log(results);
+
+    expect(results).toBeInstanceOf(Object);
+    expect(results.id).toBe('travel-1');
+    expect(results.name).toBe('Test travel');
+    expect(em.findOne).toHaveBeenCalledWith(Travel, { id });
   });
 });

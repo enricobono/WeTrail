@@ -1,6 +1,5 @@
 import {
   Args,
-  Mutation,
   Query,
   Resolver,
 } from '@nestjs/graphql';
@@ -19,21 +18,32 @@ export class TravelsResolver {
 
   @Query(() => TravelsResults, { name: 'travels' })
   async findAll(): Promise<TravelsResults> {
-    console.log('travels.resolver findAll()');
-
     const nodes = await this.travelsService.findAll();
 
     return new TravelsResults(nodes);
   }
 
-  @Query(() => TravelType, { name: 'travel' })
+  @Query(() => TravelType, { name: 'getTravelBySlug' })
   async findOneBySlug(
     @Args('slug') slug: string,
   ): Promise<Travel> {
-    console.log('travels.resolver findOneBySlug()');
-
     const travel = await this.travelsService.findOneBySlug(slug);
+
     if (!travel) {
+      throw new NotFoundException('Travel not found');
+    }
+
+    return travel;
+  }
+
+  @Query(() => TravelType, { name: 'getTravelById' })
+  async findOneById(
+    @Args('id') id: string,
+  ): Promise<Travel> {
+    const travel = await this.travelsService.findOneById(id);
+
+    if (!travel) {
+
       throw new NotFoundException('Travel not found');
     }
 

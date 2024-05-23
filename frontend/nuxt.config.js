@@ -18,9 +18,6 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { redirect: '/travels' }
   },
-  // plugins: [
-  //   './plugins/something'
-  // ],
   helpers: [
     './helpers/formatDate'
   ]

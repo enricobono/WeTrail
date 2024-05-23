@@ -53,7 +53,6 @@ export class BookingsService {
   }
 
   async pay(id: string, payBookingInput: PayBookingInput) {
-    // try {
     const booking = await this.findOneById(id);
     if (!booking) {
       throw new NotFoundException('Booking not found');
@@ -95,9 +94,6 @@ export class BookingsService {
 
     await this.em.flush();
     return booking;
-    // } catch (error) {
-    //   throw error;
-    // }
   }
 
   async findOneById(id: string) {

@@ -35,6 +35,4 @@ TravelApi.findAll().then((results) => {
   travels.value = results
 })
 
-// console.log(DateTime.serialize('2024-06-01'));
-
 </script>

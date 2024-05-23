@@ -1,18 +1,5 @@
-<script setup lang="ts">
-import formatDate from '../helpers/formatDate'
-import formatCurrency from '../helpers/formatCurrency'
-
-defineProps({
-  travel: {
-    type: Object,
-    required: true
-  }
-})
-
-</script>
-
 <template>
-  <div class="col-span-6 sm:col-span-6 md:col-span-4 xl:col-span-3 bg-white shadow-lg border border-slate-200 overflow-hidden rounded-lg">
+  <div class="col-span-12 lg:col-span-4 md:col-span-4 xl:col-span-3 bg-white shadow-lg border border-slate-200 overflow-hidden rounded-lg">
 
     <div class="flex flex-col h-full">
       <div class="relative">
@@ -32,9 +19,9 @@ defineProps({
           </div>
           <div>
             Available seats:
-            <span :class="{'bg-amber-100 text-amber-600 font-medium   rounded-full px-2 py-0.5 mb-4': travel.totalSeats - travel.reservedSeats <= 3}">
-                    {{ travel.totalSeats - travel.reservedSeats }}
-                  </span>
+            <span :class="{'bg-amber-100 text-amber-600 font-medium rounded-full px-2 py-0.5 mb-4': travel.totalSeats - travel.reservedSeats <= 3}">
+              {{ travel.totalSeats - travel.reservedSeats }}
+            </span>
           </div>
           <div>
             Price:
@@ -54,3 +41,16 @@ defineProps({
 
   </div>
 </template>
+
+<script setup lang="ts">
+import formatDate from '../../helpers/formatDate'
+import formatCurrency from '../../helpers/formatCurrency'
+
+defineProps({
+  travel: {
+    type: Object,
+    required: true
+  }
+})
+
+</script>

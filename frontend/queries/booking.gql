@@ -4,6 +4,12 @@ mutation CreateBooking ($createBookingInput: CreateBookingInput!) {
   }
 }
 
+mutation PayBooking ($payBookingInput: PayBookingInput!) {
+  payBooking(payBookingInput: $payBookingInput) {
+    id
+  }
+}
+
 query GetBookingById ($id: String!) {
   getBookingById(id: $id) {
     id
@@ -11,14 +17,14 @@ query GetBookingById ($id: String!) {
     seats
     grandTotal
     createdAt
+    expiredAt
     updatedAt
     status
     firstName
     lastName
     email
     phoneNumber
-    address1
-    address2
+    address
     city
     province
     country
@@ -28,8 +34,7 @@ query GetBookingById ($id: String!) {
   }
 }
 
-
-query DeleteBookingById ($id: String!) {
+mutation DeleteBookingById ($id: String!) {
   deleteBookingById(id: $id) {
     id
   }

@@ -1,81 +1,10 @@
-<script setup lang="ts">
-import formatDate from '../../helpers/formatDate'
-import formatCurrency from '../../helpers/formatCurrency'
-import TravelRepository from "../../repositories/TravelRepository";
-import { useBookingStore } from "../../stores/booking";
-import { navigateTo } from "nuxt/app";
-import BookingRepository from "../../repositories/BookingRepository";
-import moment from "moment/moment";
-
-const route = useRoute()
-const bookingStore = useBookingStore()
-const travel = ref({})
-const seats = ref(1)
-const error = ref('')
-
-
-TravelRepository.findOneBySlug(route.params.slug).then((results) => {
-  travel.value = results
-  console.log(travel);
-
-  bookingStore.getBookingId().then((id: string | null) => {
-    if (id == null) {
-      return
-    }
-
-    BookingRepository.find(id).then((booking) => {
-      if (booking === null) {
-        return
-      }
-
-      if (booking.travelId !== travel.value.id) {
-        return
-      }
-
-      const expirationDate = moment(booking.updatedAt).add(15, 'minutes')
-      if (moment().isAfter(expirationDate)) {
-        return
-      }
-
-      navigateTo('/booking')
-    })
-  })
-})
-
-
-function reserve() {
-  error.value = ''
-
-  if (seats.value <= 0) {
-    error.value = 'You need to be alive in order to book a travel.'
-    return
-  }
-
-  TravelRepository.findOneBySlug(route.params.slug).then((results) => {
-    travel.value = results
-
-    if (seats.value > travel.value.totalSeats - travel.value.reservedSeats) {
-      error.value = `Sorry, only ${travel.value.totalSeats - travel.value.reservedSeats} seats available for this travel.`
-      return
-    }
-
-    bookingStore.book(travel.value.slug, seats.value).then(() => {
-      console.log('now I can navigate to /booking');
-
-      navigateTo({ path: '/booking' })
-    })
-  })
-}
-
-</script>
-
 <template>
 
   <h2 class="text-2xl font-bold">Reserve your seat today!</h2>
 
   <div class="mt-4">
     <div class="shadow-lg border border-slate-200 rounded-lg">
-      <div class="flex">
+      <div class="flex flex-col md:flex-row">
         <div>
           <img class="rounded-tl-lg w-full" :src="travel.image" width="300" height="300" alt="{{ travel.name }}">
         </div>
@@ -150,3 +79,78 @@ function reserve() {
   </div>
 
 </template>
+
+<script setup lang="ts">
+import { navigateTo } from "nuxt/app";
+import { useBookingStore } from "../../stores/bookingStore";
+import TravelApi from "../../api/TravelApi";
+import BookingApi from "../../api/BookingApi";
+import moment from "moment/moment";
+import formatDate from '../../helpers/formatDate'
+import formatCurrency from '../../helpers/formatCurrency'
+
+const route = useRoute()
+const bookingStore = useBookingStore()
+const travel = ref({})
+const seats = ref(1)
+const error = ref('')
+
+
+TravelApi.findOneBySlug(route.params.slug).then((results) => {
+  travel.value = results
+  console.log(travel);
+
+  bookingStore.getBookingId().then((id: string) => {
+    BookingApi.find(id).then((booking) => {
+      if (booking === null) {
+        return
+      }
+
+      if (booking.travelId !== travel.value.id) {
+        return
+      }
+
+      console.log(booking.value);
+      
+      const expirationDate = moment(booking.value.expiredAt)
+      if (moment().isAfter(expirationDate)) {
+        return
+      }
+
+      navigateTo('/checkout')
+    })
+  }).catch(() => {
+  })
+})
+
+
+function reserve() {
+  error.value = ''
+
+  if (seats.value <= 0) {
+    error.value = 'You need to be alive in order to book a travel.'
+    return
+  }
+
+  TravelApi.findOneBySlug(route.params.slug).then((results) => {
+    travel.value = results
+
+    if (travel.value.totalSeats - travel.value.reservedSeats === 0) {
+      error.value = 'Sorry, no more seats available for this travel.'
+      return
+    }
+
+    if (seats.value > travel.value.totalSeats - travel.value.reservedSeats) {
+      error.value = `Sorry, only ${travel.value.totalSeats - travel.value.reservedSeats} seats available for this travel.`
+      return
+    }
+
+    bookingStore.book(travel.value.slug, seats.value).then(() => {
+      console.log('now I can navigate to /checkout');
+
+      navigateTo({ path: '/checkout' })
+    })
+  })
+}
+
+</script>

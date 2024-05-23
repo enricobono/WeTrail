@@ -8,8 +8,7 @@ export interface BookingResponse {
     lastName: string;
     email: string;
     phoneNumber: string;
-    address1: string;
-    address2: string;
+    address: string;
     city: string;
     province: string;
     country: string;

@@ -2,8 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TravelsResolver } from './travels.resolver';
 import { TravelsService } from './travels.service';
 import { createMock } from '@golevelup/ts-jest';
-import { TravelsResults } from "./types/travels-results.type";
-import { NotFoundException } from "@nestjs/common";
+import { TravelsResults } from './types/travels-results.type';
+import { NotFoundException } from '@nestjs/common';
 
 describe('TravelsResolver', () => {
   let sut: TravelsResolver;
@@ -21,7 +21,7 @@ describe('TravelsResolver', () => {
     travelsService = module.get<TravelsService>(TravelsService);
   });
 
-  it('findAll should return all the travels', async () => {
+  it('should return all the travels on findAll()', async () => {
     travelsService.findAll = jest
       .fn()
       .mockResolvedValueOnce([{ id: 'travel-1', name: 'Test travel' }]);
@@ -35,7 +35,7 @@ describe('TravelsResolver', () => {
     expect(travelsService.findAll).toHaveBeenCalledTimes(1);
   });
 
-  it('findOneBySlug should return a travel', async () => {
+  it('should return a travel on findOneBySlug()', async () => {
     travelsService.findOneBySlug = jest
       .fn()
       .mockResolvedValueOnce({ id: 'travel-1', name: 'Test travel' });
@@ -48,10 +48,8 @@ describe('TravelsResolver', () => {
     expect(travelsService.findOneBySlug).toHaveBeenCalledTimes(1);
   });
 
-  it('findOneBySlug should throw an exception if no travel found', async () => {
-    travelsService.findOneBySlug = jest
-      .fn()
-      .mockResolvedValueOnce(null);
+  it('should throw an exception if no travel found on findOneBySlug()', async () => {
+    travelsService.findOneBySlug = jest.fn().mockResolvedValueOnce(null);
 
     try {
       await sut.findOneBySlug('travel-1');
@@ -63,7 +61,7 @@ describe('TravelsResolver', () => {
     expect(travelsService.findOneBySlug).toHaveBeenCalledTimes(1);
   });
 
-  it('findOneById should return a travel', async () => {
+  it('should return a travel on findOneById()', async () => {
     travelsService.findOneById = jest
       .fn()
       .mockResolvedValueOnce({ id: 'travel-1', name: 'Test travel' });
@@ -77,10 +75,8 @@ describe('TravelsResolver', () => {
     expect(travelsService.findOneById).toHaveBeenCalledTimes(1);
   });
 
-  it('findOneById should throw an exception if no travel found', async () => {
-    travelsService.findOneById = jest
-      .fn()
-      .mockResolvedValueOnce(null);
+  it('should throw an exception if no travel found on findOneById()', async () => {
+    travelsService.findOneById = jest.fn().mockResolvedValueOnce(null);
 
     try {
       await sut.findOneById('travel-1');

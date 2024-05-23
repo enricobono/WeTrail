@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   ssr: false,
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'nuxt-graphql-client'],
   pages: true,
   runtimeConfig: {

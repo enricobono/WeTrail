@@ -12,7 +12,7 @@ export class BookingType {
   id: string;
 
   @Field()
-  travelId: string
+  travelId: string;
 
   @Field()
   status: string;
@@ -24,7 +24,7 @@ export class BookingType {
   grandTotal: number;
 
   @Field({ nullable: true })
-  firstName?: string;
+  firstName: string;
 
   @Field({ nullable: true })
   lastName: string;
@@ -36,10 +36,7 @@ export class BookingType {
   phoneNumber: string;
 
   @Field({ nullable: true })
-  address1: string;
-
-  @Field({ nullable: true })
-  address2: string;
+  address: string;
 
   @Field({ nullable: true })
   city: string;
@@ -61,6 +58,9 @@ export class BookingType {
 
   @Field(() => GraphQLISODateTime)
   createdAt: Date;
+
+  @Field(() => GraphQLISODateTime)
+  expiredAt: Date;
 
   @Field(() => GraphQLISODateTime)
   updatedAt: Date;

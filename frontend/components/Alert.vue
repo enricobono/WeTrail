@@ -1,34 +1,14 @@
-<script setup lang="ts">
-
-defineProps({
-  level: {
-    type: String,
-    required: true
-  },
-  message: {
-    type: String,
-    required: true
-  },
-  link: {
-    type: String
-  },
-  cta: {
-    type: String
-  }
-})
-
-</script>
-
-
 <template>
 
-  <div class="p-4 mb-4 text-sm rounded-lg" role="alert" :class="{
+  <div class="p-4 mb-4 rounded-lg" role="alert" :class="{
     'bg-amber-100': level === 'warning',
-    'bg-blue-50': level === 'info'
+    'bg-blue-50': level === 'info',
+    'bg-red-50': level === 'danger'
   }">
     <p>
       <b v-if="level === 'warning'">Oops!</b>
-      <b v-else>Yatta!</b>
+      <b v-else-if="level === 'info'">Yatta!</b>
+      <b v-else>D'oh!</b>
 
       {{ message }}
       <NuxtLink :to="link" v-if="link"
@@ -39,3 +19,27 @@ defineProps({
   </div>
 
 </template>
+
+<script setup lang="ts">
+
+defineProps({
+  level: {
+    type: String,
+    required: true
+  },
+
+  message: {
+    type: String,
+    required: true
+  },
+
+  link: {
+    type: String
+  },
+
+  cta: {
+    type: String
+  }
+})
+
+</script>

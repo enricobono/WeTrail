@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TravelsService } from './travels.service';
 import { createMock } from '@golevelup/ts-jest';
 import { EntityManager } from '@mikro-orm/postgresql';
-import { Travel } from './entities/travel.entity';
 
 describe('TravelsService', (): void => {
   let sut: TravelsService;
@@ -20,46 +19,59 @@ describe('TravelsService', (): void => {
     em = module.get<EntityManager>(EntityManager);
   });
 
-  it('findAll should return all the travels', async () => {
-    em.findAndCount = jest
-      .fn()
-      .mockResolvedValueOnce([[{ id: 'travel-1', name: 'Test travel' }], 1]);
+  it('should return all the travels on findAll()', async () => {
+    const connectionMock = {
+      execute: () => {
+        return [{ id: 'travel-1', name: 'Test travel', reserved_seats: 2 }];
+      },
+    };
+
+    em.getConnection = jest.fn().mockImplementation(() => connectionMock);
 
     const results = await sut.findAll();
 
     expect(results).toBeInstanceOf(Array);
+    expect(results.length).toBe(1);
     expect(results[0].id).toBe('travel-1');
     expect(results[0].name).toBe('Test travel');
-    expect(em.findAndCount).toHaveBeenCalledWith(Travel, {}, { orderBy: { startingDate: 'ASC' } });
+    expect(results[0].reservedSeats).toBe(2);
   });
 
-  it('findOneBySlug should return a travel', async () => {
-    em.findOne = jest
-      .fn()
-      .mockResolvedValueOnce({ id: 'travel-1', name: 'Test travel' });
+  it('should return a travel on findOneBySlug()', async () => {
+    const connectionMock = {
+      execute: () => {
+        return [{ id: 'travel-1', name: 'Test travel', reserved_seats: 2 }];
+      },
+    };
 
-    const slug = 'travel-1'
+    em.getConnection = jest.fn().mockImplementation(() => connectionMock);
+
+    const slug = 'travel-1';
     const results = await sut.findOneBySlug(slug);
     console.log(results);
 
     expect(results).toBeInstanceOf(Object);
     expect(results.id).toBe('travel-1');
     expect(results.name).toBe('Test travel');
-    expect(em.findOne).toHaveBeenCalledWith(Travel, { slug });
+    expect(results.name).toBe('Test travel');
   });
 
-  it('findOneById should return a travel', async () => {
-    em.findOne = jest
-      .fn()
-      .mockResolvedValueOnce({ id: 'travel-1', name: 'Test travel' });
+  it('should return a travel on findOneById()', async () => {
+    const connectionMock = {
+      execute: () => {
+        return [{ id: 'travel-1', name: 'Test travel', reserved_seats: 2 }];
+      },
+    };
 
-    const id = '00000000-0000-4000-b000-000000000001'
+    em.getConnection = jest.fn().mockImplementation(() => connectionMock);
+
+    const id = '00000000-0000-4000-b000-000000000001';
     const results = await sut.findOneById(id);
     console.log(results);
 
     expect(results).toBeInstanceOf(Object);
     expect(results.id).toBe('travel-1');
     expect(results.name).toBe('Test travel');
-    expect(em.findOne).toHaveBeenCalledWith(Travel, { id });
+    expect(results.name).toBe('Test travel');
   });
 });

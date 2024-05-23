@@ -9,7 +9,7 @@ import {
 } from '@mikro-orm/core';
 import { v4 } from 'uuid';
 
-@Entity({tableName:'travels'})
+@Entity({ tableName: 'travels' })
 export class Travel {
   @PrimaryKey({ type: UuidType })
   id: string = v4();

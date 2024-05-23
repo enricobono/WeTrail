@@ -1,21 +1,3 @@
-<script setup lang="ts">
-
-defineProps({
-  mood: {
-    type: String,
-    required: true
-  },
-  score: {
-    type: Number
-  },
-  color: {
-    type: String
-  }
-})
-
-
-</script>
-
 <template>
   <div class="w-full pr-4">
     <div class="mb-1">{{ mood }}:</div>
@@ -24,3 +6,23 @@ defineProps({
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+
+defineProps({
+  mood: {
+    type: String,
+    required: true
+  },
+
+  score: {
+    type: Number
+  },
+
+  color: {
+    type: String
+  }
+})
+
+</script>
+

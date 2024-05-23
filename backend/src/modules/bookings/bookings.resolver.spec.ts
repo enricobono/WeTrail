@@ -2,8 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BookingsResolver } from './bookings.resolver';
 import { BookingsService } from './bookings.service';
 import { createMock } from '@golevelup/ts-jest';
-import { NotFoundException } from "@nestjs/common";
-import { CreateBookingInput } from "./dto/create-booking.input";
+import { PayBookingInput } from './dto/pay-booking-input';
+import { NotFoundException } from '@nestjs/common';
+import { CreateBookingInput } from './dto/create-booking-input';
 
 describe('BookingsResolver', () => {
   let sut: BookingsResolver;
@@ -21,10 +22,10 @@ describe('BookingsResolver', () => {
     bookingsService = module.get<BookingsService>(BookingsService);
   });
 
-  it('create should save a new booking', async () => {
+  it('should save a new booking on createBooking()', async () => {
     const dto: CreateBookingInput = {
       travelSlug: 'travel-1',
-      seats: 1
+      seats: 1,
     };
 
     bookingsService.create = jest
@@ -39,12 +40,45 @@ describe('BookingsResolver', () => {
     expect(bookingsService.create).toHaveBeenCalledWith(dto);
   });
 
-  it('findOneById should return a booking', async () => {
-    bookingsService.findOneById = jest
-      .fn()
-      .mockResolvedValueOnce({ id: '00000000-0000-4000-b000-000000000001', seats: 1 });
+  it('should update the booking on payBooking()', async () => {
+    const id = '00000000-0000-4000-b000-000000000001';
+    const dto: PayBookingInput = {
+      id: id,
+      firstName: 'Roger',
+      lastName: 'Waters',
+      email: 'roger@example.com',
+      phoneNumber: '+44 12 1234567',
+      address: 'Abbey Rd, 1',
+      city: 'London',
+      province: 'Greater London',
+      country: 'UK',
+      zipCode: 'NW8 0AE',
+      creditCardNumber: '4242424242424242',
+      creditCardName: 'Roger Waters',
+      expirationMonth: 8,
+      expirationYear: 29,
+    };
 
-    const results = await sut.findOneById('00000000-0000-4000-b000-000000000001');
+    bookingsService.pay = jest.fn().mockResolvedValueOnce(dto);
+
+    const results = await sut.payBooking(dto);
+
+    console.log(results);
+
+    expect(results).toBeInstanceOf(Object);
+    expect(results.id).toBe(id);
+    expect(bookingsService.pay).toHaveBeenCalledWith(id, dto);
+  });
+
+  it('should return a booking on findOneById()', async () => {
+    bookingsService.findOneById = jest.fn().mockResolvedValueOnce({
+      id: '00000000-0000-4000-b000-000000000001',
+      seats: 1,
+    });
+
+    const results = await sut.findOneById(
+      '00000000-0000-4000-b000-000000000001',
+    );
 
     expect(results).toBeInstanceOf(Object);
     expect(results.id).toBe('00000000-0000-4000-b000-000000000001');
@@ -52,10 +86,8 @@ describe('BookingsResolver', () => {
     expect(bookingsService.findOneById).toHaveBeenCalledTimes(1);
   });
 
-  it('findOneById should throw an exception if no booking found', async () => {
-    bookingsService.findOneById = jest
-      .fn()
-      .mockResolvedValueOnce(null);
+  it('should throw an exception if no booking found on findOneById()', async () => {
+    bookingsService.findOneById = jest.fn().mockResolvedValueOnce(null);
 
     try {
       await sut.findOneById('00000000-0000-4000-b000-000000000001');
@@ -67,21 +99,17 @@ describe('BookingsResolver', () => {
     expect(bookingsService.findOneById).toHaveBeenCalledTimes(1);
   });
 
-  it('delete should delete a booking', async () => {
+  it('should delete a booking on delete()', async () => {
     const booking = { id: '00000000-0000-4000-b000-000000000001', seats: 1 };
-    bookingsService.findOneById = jest
-      .fn()
-      .mockResolvedValueOnce(booking);
+    bookingsService.findOneById = jest.fn().mockResolvedValueOnce(booking);
 
     await sut.deleteOneById('00000000-0000-4000-b000-000000000001');
 
     expect(bookingsService.delete).toHaveBeenCalledWith(booking);
   });
 
-  it('delete should throw an exception if no booking found', async () => {
-    bookingsService.findOneById = jest
-      .fn()
-      .mockResolvedValueOnce(null);
+  it('should throw an exception if no booking found on delete()', async () => {
+    bookingsService.findOneById = jest.fn().mockResolvedValueOnce(null);
 
     try {
       await sut.deleteOneById('00000000-0000-4000-b000-000000000001');

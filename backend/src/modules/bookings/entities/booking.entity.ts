@@ -7,6 +7,7 @@ import {
   UuidType,
 } from '@mikro-orm/core';
 import { v4 } from 'uuid';
+import { IsEmail, IsNotEmpty, Max, Min } from 'class-validator';
 
 @Entity({ tableName: 'bookings' })
 export class Booking {
@@ -14,55 +15,68 @@ export class Booking {
   id: string = v4();
 
   @Property()
-  travelId: string
+  @IsNotEmpty()
+  travelId: string;
 
   @Property()
-  status: string
+  status: string;
 
   @Property({ type: IntegerType })
+  @Min(1)
+  @Max(5)
   seats: number;
 
   @Property({ type: IntegerType })
   grandTotal: number;
 
   @Property({ nullable: true })
-  firstName: string
+  @IsNotEmpty()
+  firstName: string;
 
   @Property({ nullable: true })
-  lastName: string
+  @IsNotEmpty()
+  lastName: string;
 
   @Property({ nullable: true })
-  email: string
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
 
   @Property({ nullable: true })
-  phoneNumber: string
+  @IsNotEmpty()
+  phoneNumber: string;
 
   @Property({ nullable: true })
-  address1: string
+  @IsNotEmpty()
+  address: string;
 
   @Property({ nullable: true })
-  address2: string
+  @IsNotEmpty()
+  city: string;
 
   @Property({ nullable: true })
-  city: string
+  @IsNotEmpty()
+  province: string;
 
   @Property({ nullable: true })
-  province: string
+  @IsNotEmpty()
+  country: string;
 
   @Property({ nullable: true })
-  country: string
+  @IsNotEmpty()
+  zipCode: string;
 
   @Property({ nullable: true })
-  zipCode: string
+  paymentProcessor: string;
 
   @Property({ nullable: true })
-  paymentProcessor: string
-
-  @Property({ nullable: true })
-  paymentId: string
+  paymentId: string;
 
   @Property({ type: DateTimeType, nullable: true })
   createdAt: Date;
+
+  @Property({ type: DateTimeType, nullable: true })
+  expiredAt: Date;
 
   @Property({ type: DateTimeType, nullable: true })
   updatedAt: Date;

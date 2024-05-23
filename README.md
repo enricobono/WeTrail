@@ -43,13 +43,32 @@ Run the test using: `npm run test`
 ### Frontend
 
 
-## Installation
+#### Installation
 
 - Copy `.env.example` to `.env`
 - Run `npm install`
 
 
-## Run the application
+#### Run the application
 
 - Start the frontend server: `npm run dev`
 - You can consume your application by navigating to http://localhost:3000
+
+
+## Screenshots
+
+Travels list page:
+![01](https://github.com/enricobono/WeTrail/assets/2254482/1654d60f-79f5-4263-a410-0cf0fd4a2f98)
+
+Travel detail page:
+![02](https://github.com/enricobono/WeTrail/assets/2254482/6f41bb17-7c2e-4603-8995-b0b9c010921a)
+
+Checkout page:
+![03](https://github.com/enricobono/WeTrail/assets/2254482/a3b4312e-0a3d-4867-9f47-692ef7d2297c)
+
+Checkout page with payment details:
+![04](https://github.com/enricobono/WeTrail/assets/2254482/ea4b7e14-250c-41b3-a570-8d1cf7240e91)
+
+Payment confirmation page:
+![05](https://github.com/enricobono/WeTrail/assets/2254482/e7519c0d-c67a-4fb0-b76b-a839c2442abe)
+

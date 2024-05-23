@@ -31,6 +31,7 @@ describe('BookingsService', () => {
   it('should create a new booking on createBooking()', async () => {
     const dto: CreateBookingInput = {
       travelSlug: 'travel-1',
+      email: 'email@example.com',
       seats: 1,
     };
 
@@ -53,6 +54,7 @@ describe('BookingsService', () => {
   it('should throw an exception when the travel does not exist on createBooking()', async () => {
     const dto: CreateBookingInput = {
       travelSlug: 'travel-1',
+      email: 'email@example.com',
       seats: 1,
     };
 
@@ -72,6 +74,7 @@ describe('BookingsService', () => {
   it('should throw an exception when no seats are available on createBooking()', async () => {
     const dto: CreateBookingInput = {
       travelSlug: 'travel-1',
+      email: 'email@example.com',
       seats: 1,
     };
 

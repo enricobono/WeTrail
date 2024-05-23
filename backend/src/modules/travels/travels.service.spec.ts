@@ -48,7 +48,6 @@ describe('TravelsService', (): void => {
 
     const slug = 'travel-1';
     const results = await sut.findOneBySlug(slug);
-    console.log(results);
 
     expect(results).toBeInstanceOf(Object);
     expect(results.id).toBe('travel-1');
@@ -67,7 +66,6 @@ describe('TravelsService', (): void => {
 
     const id = '00000000-0000-4000-b000-000000000001';
     const results = await sut.findOneById(id);
-    console.log(results);
 
     expect(results).toBeInstanceOf(Object);
     expect(results.id).toBe('travel-1');

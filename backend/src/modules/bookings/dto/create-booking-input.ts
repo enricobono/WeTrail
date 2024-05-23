@@ -6,6 +6,9 @@ export class CreateBookingInput {
   @Field()
   travelSlug: string;
 
+  @Field()
+  email: string;
+
   @Field(() => Int)
   @Min(0)
   @Max(5)

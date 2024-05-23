@@ -24,8 +24,6 @@ export class BookingsResolver {
 
   @Query(() => BookingType, { name: 'getBookingById' })
   async findOneById(@Args('id') id: string): Promise<Booking> {
-    console.log('bookings.resolver findOneById()');
-
     const booking = await this.bookingsService.findOneById(id);
     if (!booking) {
       throw new NotFoundException('Booking not found');

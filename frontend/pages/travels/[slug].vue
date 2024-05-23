@@ -39,22 +39,32 @@
               <TravelMood mood="Party" :score="travel.moodParty" color="bg-amber-500"/>
             </div>
 
-            <div class="grid gap-4 md:grid-cols-3 mt-4">
-              <div>
-                <label for="seats" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Seats to reserve
-                </label>
-                <input type="number" min="1" :max="travel.totalSeats - travel.reservedSeats" step="1"
-                       id="seats" v-model="seats" placeholder="John" required
+            <form ref="formReference" @submit.stop.prevent="onSubmit()">
+            <div class="grid gap-4 md:grid-cols-3 mt-3">
 
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg lock w-full p-2.5"
-                       :class="{'bg-red-50 border-red-500 text-red-900': error }"
-                />
-                <p class="mt-2 text-sm text-red-600 dark:text-red-500" v-if="error ">
-                  {{ error }}
-                </p>
-              </div>
+                <div class="relative z-0 w-full group">
+                  <label for="seats" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Seats to reserve
+                  </label>
+                  <input type="number" min="1" :max="travel.totalSeats - travel.reservedSeats" step="1"
+                         id="seats" v-model="seats" placeholder="John" required
+                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg lock w-full p-2.5"
+                         :class="{'bg-red-50 border-red-500 text-red-900': seatsError }"/>
+                  <p class="mt-2 text-sm text-red-600 dark:text-red-500" v-if="seatsError ">
+                    {{ seatsError }}
+                  </p>
+                </div>
+
+                <div class="relative z-0 w-full mb-1 group">
+                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                  <input type="email" id="email" v-model="email" placeholder="email@example.com" required
+                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg lock w-full p-2.5"
+                         :class="{'bg-red-50 border-red-500 text-red-900': seatsError }"/>
+                </div>
+
             </div>
+            </form>
+
           </div>
         </div>
       </div>
@@ -91,44 +101,43 @@ import formatCurrency from '../../helpers/formatCurrency'
 
 const route = useRoute()
 const bookingStore = useBookingStore()
+const email = ref('')
 const travel = ref({})
 const seats = ref(1)
-const error = ref('')
+const seatsError = ref('')
+const formReference = ref<HTMLElement | null>(null)
 
 
 TravelApi.findOneBySlug(route.params.slug).then((results) => {
   travel.value = results
-  console.log(travel);
 
   bookingStore.getBookingId().then((id: string) => {
     BookingApi.find(id).then((booking) => {
-      if (booking === null) {
-        return
-      }
-
       if (booking.travelId !== travel.value.id) {
         return
       }
 
-      console.log(booking.value);
-      
       const expirationDate = moment(booking.value.expiredAt)
       if (moment().isAfter(expirationDate)) {
         return
       }
 
       navigateTo('/checkout')
-    })
+    }).catch(() => {})
   }).catch(() => {
   })
 })
 
 
 function reserve() {
-  error.value = ''
+  formReference.value.requestSubmit()
+}
+
+function onSubmit() {
+  seatsError.value = ''
 
   if (seats.value <= 0) {
-    error.value = 'You need to be alive in order to book a travel.'
+    seatsError.value = 'Sorry, only living people on board 😉'
     return
   }
 
@@ -136,18 +145,16 @@ function reserve() {
     travel.value = results
 
     if (travel.value.totalSeats - travel.value.reservedSeats === 0) {
-      error.value = 'Sorry, no more seats available for this travel.'
+      seatsError.value = 'Sorry, no more seats available for this travel.'
       return
     }
 
     if (seats.value > travel.value.totalSeats - travel.value.reservedSeats) {
-      error.value = `Sorry, only ${travel.value.totalSeats - travel.value.reservedSeats} seats available for this travel.`
+      seatsError.value = `Sorry, only ${travel.value.totalSeats - travel.value.reservedSeats} seats available for this travel.`
       return
     }
 
-    bookingStore.book(travel.value.slug, seats.value).then(() => {
-      console.log('now I can navigate to /checkout');
-
+    bookingStore.book(travel.value.slug, email.value, seats.value).then(() => {
       navigateTo({ path: '/checkout' })
     })
   })

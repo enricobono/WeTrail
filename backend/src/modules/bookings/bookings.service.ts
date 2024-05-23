@@ -18,25 +18,17 @@ export class BookingsService {
   ) {}
 
   async create(createBookingInput: CreateBookingInput) {
-    const { travelSlug, seats } = createBookingInput;
+    const { travelSlug, email, seats } = createBookingInput;
 
-    // try {
     const travel = await this.travelsService.findOneBySlug(travelSlug);
     if (!travel) {
       throw new NotFoundException('Travel not found');
     }
 
     const reservedSeats = await this.findReservedSeatsByTravelId(travel.id);
-    console.log(reservedSeats);
-
-    console.log(21);
-
     if (reservedSeats >= BookingConstants.MAX_SEATS_PER_TRAVEL) {
-      console.log(22);
-
       throw new BadRequestException('No available seats for this travel');
     }
-    console.log(23);
 
     const now = new Date();
     const expiredAt = new Date();
@@ -47,17 +39,17 @@ export class BookingsService {
     const booking = this.em.create(Booking, {
       travelId: travel.id,
       status: 'reserved',
+      email: email,
       seats: seats,
       grandTotal: travel.price * seats,
       createdAt: now,
       expiredAt: expiredAt,
       updatedAt: now,
     });
+
     await this.em.persistAndFlush(booking);
+
     return booking;
-    // } catch (error) {
-    //   throw error;
-    // }
   }
 
   async pay(id: string, payBookingInput: PayBookingInput) {
@@ -109,12 +101,10 @@ export class BookingsService {
   }
 
   async findOneById(id: string) {
-    console.log('bookings.service: findOneById()');
     return await this.em.findOne(Booking, { id });
   }
 
   async delete(booking: Booking) {
-    console.log('bookings.service: deleteOneById()');
     await this.em.removeAndFlush(booking);
   }
 

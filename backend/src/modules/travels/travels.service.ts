@@ -2,15 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { TravelType } from './types/travel.type';
 
-// import { Booking } from '../bookings/entities/booking.entity';
 
 @Injectable()
 export class TravelsService {
   constructor(private em: EntityManager) {}
 
   async findAll() {
-    console.log('travels.service: findAll()');
-
     const connection = this.em.getConnection();
 
     const results = await connection.execute(
@@ -24,8 +21,6 @@ export class TravelsService {
                             ON t.id = b.travel_id
          ORDER BY starting_date ASC`,
     );
-
-    console.log(results);
 
     const travels: TravelType[] = [];
     for (const row of results) {
@@ -52,8 +47,6 @@ export class TravelsService {
   }
 
   async findOneBySlug(slug: string) {
-    console.log('travels.service: findOneBySlug()');
-
     const results = await this.em.getConnection().execute(
       `SELECT t.*, COALESCE(b.sum_of_seats, 0) as reserved_seats
             FROM travels t
@@ -91,8 +84,6 @@ export class TravelsService {
   }
 
   async findOneById(id: string) {
-    console.log('travels.service: findOneById()');
-
     const results = await this.em.getConnection().execute(
       `SELECT t.*, COALESCE(b.sum_of_seats, 0) as reserved_seats
             FROM travels t

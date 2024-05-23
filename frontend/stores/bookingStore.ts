@@ -5,17 +5,13 @@ export const useBookingStore = defineStore('bookingStore', {
     bookingId: '',
   }),
   actions: {
-    async book(travelSlug: string, seats: number) {
-      console.log('useBookingStore.book() travelSlug:' + travelSlug);
-
+    async book(travelSlug: string, email: string, seats: number) {
       this.getBookingId().then((bookingId: string) => {
         this.delete(bookingId)
       }).catch(() => {
       })
 
-      await BookingApi.create(travelSlug, seats).then((results) => {
-        console.log('dentro il then');
-
+      await BookingApi.create(travelSlug, email, seats).then((results) => {
         this.bookingId = results
         localStorage.setItem('booking-id', this.bookingId)
       })
@@ -28,7 +24,7 @@ export const useBookingStore = defineStore('bookingStore', {
 
       await BookingApi.delete(bookingId).then(() => {
         localStorage.removeItem('booking-id')
-      })
+      }).catch(() => {})
     },
 
     async getBookingId(): Promise<string | null> {

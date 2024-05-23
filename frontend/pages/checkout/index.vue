@@ -77,7 +77,7 @@
 
           <form ref="formReference" @submit.stop.prevent="onSubmit()">
             <CheckoutPayment
-                :booking="booking" />
+                :booking="booking"/>
           </form>
 
 
@@ -156,14 +156,7 @@ const paymentReference = ref<HTMLElement | null>(null)
 
 bookingStore.getBookingId().then(async (id: string) => {
   BookingApi.find(id).then((results) => {
-    if (results === null) {
-      booking.value = null
-      return
-    }
-
     booking.value = results
-    console.log(booking.value);
-    
 
     if (booking.value.status === 'paid') {
       navigateTo('/checkout/payment-accepted')
@@ -184,10 +177,12 @@ bookingStore.getBookingId().then(async (id: string) => {
         reservationExpiresIn.value = moment(expirationDate.diff(moment())).format('mm:ss')
       }, 1000)
 
+    }).catch(() => {
     })
+  }).catch(() => {
+    booking.value = null
   })
 }).catch(() => {
-  console.log('here');
   booking.value = null
 })
 
@@ -202,7 +197,6 @@ function proceedToPayment() {
   step.value = 'checkout'
   paymentReference.value?.scrollIntoView({ behavior: 'smooth' })
 }
-
 
 function pay() {
   formReference.value.requestSubmit()

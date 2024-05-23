@@ -25,6 +25,7 @@ describe('BookingsResolver', () => {
   it('should save a new booking on createBooking()', async () => {
     const dto: CreateBookingInput = {
       travelSlug: 'travel-1',
+      email: 'email@example.com',
       seats: 1,
     };
 
@@ -62,8 +63,6 @@ describe('BookingsResolver', () => {
     bookingsService.pay = jest.fn().mockResolvedValueOnce(dto);
 
     const results = await sut.payBooking(dto);
-
-    console.log(results);
 
     expect(results).toBeInstanceOf(Object);
     expect(results.id).toBe(id);

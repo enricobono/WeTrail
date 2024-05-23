@@ -1,6 +1,6 @@
 import type { Travel } from '../types/travel.interface';
-import { TravelsResponse } from "../types/travels-response.interface";
 import { TravelResponse } from "../types/travel-response.interface";
+import { TravelsResponse } from "../types/travels-response.interface";
 
 export default {
   async findAll(): Promise<Travel[]> {
@@ -14,16 +14,9 @@ export default {
     return results.getTravelBySlug
   },
 
-  async find(id: String): Promise<Travel|null> {
-    try {
+  async find(id: String): Promise<Travel | null> {
       const results: Promise<TravelResponse> = await GqlGetTravelById({ id: id })
 
       return results.getTravelById
-    } catch (error) {
-      // console.error(error);
-
-      return null
-    }
-  },
-
+  }
 }

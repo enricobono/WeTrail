@@ -37,7 +37,7 @@ export class Booking {
   @IsNotEmpty()
   lastName: string;
 
-  @Property({ nullable: true })
+  @Property()
   @IsEmail()
   @IsNotEmpty()
   email: string;

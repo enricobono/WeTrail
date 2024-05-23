@@ -58,17 +58,17 @@ Run the test using: `npm run test`
 ## Screenshots
 
 Travels list page:
-![01](https://github.com/enricobono/WeTrail/assets/2254482/04237b49-f139-4429-b44d-e395a62e10c6)
+![01](https://github.com/enricobono/WeTrail/assets/2254482/1654d60f-79f5-4263-a410-0cf0fd4a2f98)
 
 Travel detail page:
-![02](https://github.com/enricobono/WeTrail/assets/2254482/2f4f0118-2f81-4d2d-ae3e-05a897fac8b9)
+![02](https://github.com/enricobono/WeTrail/assets/2254482/6f41bb17-7c2e-4603-8995-b0b9c010921a)
 
 Checkout page:
-![03](https://github.com/enricobono/WeTrail/assets/2254482/5fd148b1-02a2-412b-88f8-17b77cdbf3ca)
+![03](https://github.com/enricobono/WeTrail/assets/2254482/b892bf2c-e675-48db-9464-95f5598ebc41)
 
 Checkout page with payment details:
-![04](https://github.com/enricobono/WeTrail/assets/2254482/bd850ee9-9e20-44d8-ad06-afb59e7042db)
+![04](https://github.com/enricobono/WeTrail/assets/2254482/ea4b7e14-250c-41b3-a570-8d1cf7240e91)
 
 Payment confirmation page:
-![05](https://github.com/enricobono/WeTrail/assets/2254482/56ab3001-5e89-4e17-9981-26288d0bdeb6)
+![05](https://github.com/enricobono/WeTrail/assets/2254482/e7519c0d-c67a-4fb0-b76b-a839c2442abe)
 

@@ -64,7 +64,7 @@ Travel detail page:
 ![02](https://github.com/enricobono/WeTrail/assets/2254482/6f41bb17-7c2e-4603-8995-b0b9c010921a)
 
 Checkout page:
-![03](https://github.com/enricobono/WeTrail/assets/2254482/b892bf2c-e675-48db-9464-95f5598ebc41)
+![03](https://github.com/enricobono/WeTrail/assets/2254482/a3b4312e-0a3d-4867-9f47-692ef7d2297c)
 
 Checkout page with payment details:
 ![04](https://github.com/enricobono/WeTrail/assets/2254482/ea4b7e14-250c-41b3-a570-8d1cf7240e91)

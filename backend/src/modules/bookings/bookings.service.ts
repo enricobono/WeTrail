@@ -30,6 +30,12 @@ export class BookingsService {
       throw new BadRequestException('No available seats for this travel');
     }
 
+    if (seats > BookingConstants.MAX_SEATS_PER_TRAVEL - reservedSeats) {
+      throw new BadRequestException(
+        'No all the requested seats are available for this travel',
+      );
+    }
+
     const now = new Date();
     const expiredAt = new Date();
     expiredAt.setMinutes(
